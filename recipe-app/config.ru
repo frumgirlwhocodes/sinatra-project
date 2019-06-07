@@ -5,5 +5,7 @@ if ActiveRecord::Migrator.needs_migration?
 end
 
 run ApplicationController
+use UsersController
+use RecipesController
 use RecipesController.rbsController
 use UsersController.rbsController
