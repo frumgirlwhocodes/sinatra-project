@@ -1,9 +1,12 @@
 class UsersController < ApplicationController
 
 
-  # GET: /users/new
-  get "/users/new" do
-    erb :"/users/create_user.html"
+  get '/signup' do
+    if !is_logged_in?  
+      erb :'/users/create_user'
+    else
+    redirect to '/tweets'
+    end
   end
 
 
