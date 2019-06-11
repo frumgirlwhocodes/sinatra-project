@@ -1,1 +1,9 @@
-<h1>This is the Model's index page.</h1>
+<h1>All your recipes displayed </h1> 
+<% @recipes.each do |recipe| %> 
+<p> Recipe Name: <%=recipe.name%> </p>
+<p> Recipe ingredients: <%=recipe.ingredients%> </p>
+<p> Recipe Cook Time:  <%=recipe.cook_time%> </p>
+<p> <% recipe_link = "/recipes/#{recipe.id}" %>
+    <p><a href="<%= recipe_link %>"></a></p>
+<% end%> 
+

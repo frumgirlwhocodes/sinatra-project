@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   # GET: /users/new
   get "/users/new" do
-    erb :"/users/create_user..html"
+    erb :"/users/create_user.html"
   end
 
 

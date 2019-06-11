@@ -2,16 +2,19 @@ class RecipesController < ApplicationController
 
   # GET: /recipes
   get "/recipes" do
+     @recipes = Recipe.all
     erb :"/recipes/index.html"
   end
 
   # GET: /recipes/new
   get "/recipes/new" do
+  
     erb :"/recipes/new.html"
   end
 
   # POST: /recipes
   post "/recipes" do
+      @recipe=Recipe.create(params)
     redirect "/recipes"
   end
 
