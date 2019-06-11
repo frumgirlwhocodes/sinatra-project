@@ -2,9 +2,20 @@ class RecipesController < ApplicationController
 
   # GET: /recipes
   get "/recipes" do
-     @recipes = Recipe.all
-    erb :"/recipes/index.html"
+    if is_logged_in?
+      @recipes = Recipe.all
+      @recipe= current_user
+      erb :"/tweets/tweets"
+    else redirect to '/login'
+    end
   end
+    
+  
+   post "/recipes" do
+      @recipe=Recipe.create(params)
+    redirect "/recipes"
+  end
+
 
   # GET: /recipes/new
   get "/recipes/new" do
@@ -12,12 +23,8 @@ class RecipesController < ApplicationController
     erb :"/recipes/new.html"
   end
 
-  # POST: /recipes"
-  post "/recipes" do
-      @recipe=Recipe.create(params)
-    redirect "/recipes"
-  end
 
+ 
   # GET: /recipes/5
   get "/recipes/:id" do
     erb :"/recipes/show.html"
