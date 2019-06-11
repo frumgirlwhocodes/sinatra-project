@@ -3,9 +3,8 @@ require './config/environment'
 if ActiveRecord::Migrator.needs_migration?
   raise 'Migrations are pending. Run `rake db:migrate` to resolve the issue.'
 end
+use Rack::MethodOveride 
 
 run ApplicationController
 use UsersController
 use RecipesController
-use RecipesController.rbsController
-use UsersController.rbsController
