@@ -12,7 +12,7 @@ class RecipesController < ApplicationController
     erb :"/recipes/new.html"
   end
 
-  # POST: /recipes
+  # POST: /recipes"
   post "/recipes" do
       @recipe=Recipe.create(params)
     redirect "/recipes"

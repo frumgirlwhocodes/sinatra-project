@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   get "/users/:id" do
     erb :"/users/show.html"
   end
+end
 
  
 
