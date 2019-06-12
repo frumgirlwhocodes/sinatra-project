@@ -8,6 +8,28 @@ class UsersController < ApplicationController
     redirect to '/tweets'
     end
   end
+  
+  
+   get '/login' do
+    if is_logged_in?  
+      redirect to '/recipes'
+    end
+
+    erb :"/users/login"
+  end
+  
+  post '/login'
+user = User.find_by(:username => params["username"])
+
+    if user && user.authenticate(params[:password])
+      session[:user_id] = user.id
+      redirect to '/recipes'
+    else
+      redirect to '/login'
+    end
+  end
+
+
 
 
   # GET: /users/5

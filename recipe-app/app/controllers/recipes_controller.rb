@@ -5,27 +5,25 @@ class RecipesController < ApplicationController
     if is_logged_in?
       @recipes = Recipe.all
       @recipe= current_user
-      erb :"/tweets/tweets"
+      erb :"/recipes/recipes"
     else redirect to '/login'
     end
-  end
-    
-  
-   post "/recipes" do
-      @recipe=Recipe.create(params)
-    redirect "/recipes/"
   end
 
 
   # GET: /recipes/new
   get "/recipes/new" do
-    if !is_logged_in
-      redirect "/login"
+    if is_logged_in
+    erb  :"/recipes/new.html"
+  else 
+    redirect "/login"
     end 
   
-    erb :"/recipes/new.html"
   end
-
+post "/recipes" do
+      @recipe=Recipe.create(params)
+    redirect "/recipes/"
+  end
 
  
   # GET: /recipes/5
