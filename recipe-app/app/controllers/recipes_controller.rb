@@ -13,12 +13,15 @@ class RecipesController < ApplicationController
   
    post "/recipes" do
       @recipe=Recipe.create(params)
-    redirect "/recipes"
+    redirect "/recipes/"
   end
 
 
   # GET: /recipes/new
   get "/recipes/new" do
+    if !is_logged_in
+      redirect "/login"
+    end 
   
     erb :"/recipes/new.html"
   end
