@@ -4,7 +4,7 @@ class RecipesController < ApplicationController
   get "/recipes" do
     if is_logged_in?
       @recipes = Recipe.all
-      @recipe= current_user
+      @user= current_user
       erb :"/recipes/recipes"
     else redirect to '/login'
     end
