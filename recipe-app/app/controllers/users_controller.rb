@@ -8,6 +8,15 @@ class UsersController < ApplicationController
     redirect to '/tweets'
     end
   end
+  post '/signup' do
+		if params["username"].empty? || params["email"].empty? || params["password"].empty?
+			redirect '/signup'
+		else
+		  user=User.create(params)
+		  session[:id]=user.id 
+		  redirect "/recipes"
+		end 
+		end 
   
   
    get '/login' do
