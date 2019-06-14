@@ -45,10 +45,6 @@ user = User.find_by(:username => params[:username])
     slug = params[:slug]
     @user = User.find_by_slug(slug)
   @recipes= @user.recipes
-    erb :"/users/show"
-  end
-  
-  get "/users/slug" do
     erb :"/users/show.html"
   end
 end
