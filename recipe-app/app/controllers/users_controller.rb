@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     end
   end
   post '/signup' do
-		if params["username"].empty? || params["email"].empty? || params["password"].empty?
+		if params[:username].empty? || params[:email].empty? || params[:password].empty?
 			redirect '/signup'
 		else
 		  user=User.create(params)
@@ -27,8 +27,8 @@ class UsersController < ApplicationController
     erb :"/users/login"
   end
   
-  post '/login'
-user = User.find_by(:username => params["username"])
+  post '/login' do 
+user = User.find_by(:username => params[:username])
 
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
@@ -41,8 +41,14 @@ user = User.find_by(:username => params["username"])
 
 
 
-  # GET: /users/5
-  get "/users/:id" do
+  get '/users/:slug' do
+    slug = params[:slug]
+    @user = User.find_by_slug(slug)
+  @recipes= @user.recipes
+    erb :"/users/show"
+  end
+  
+  get "/users/slug" do
     erb :"/users/show.html"
   end
 end

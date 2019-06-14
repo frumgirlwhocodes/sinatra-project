@@ -15,7 +15,7 @@ helpers do
 			User.find(session[:user_id])
 		end
 
-		def logged_in?
+		def is_logged_in?
 			!!session[:user_id]
 		end
 end 
