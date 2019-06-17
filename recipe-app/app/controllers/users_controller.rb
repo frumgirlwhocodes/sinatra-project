@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     if !is_logged_in?  
       erb :'/users/create_user'
     else
-    redirect to '/tweets'
+    redirect to '/recipes'
     end
   end
   post '/signup' do
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   end
   
   post '/login' do 
-user = User.find_by(:username => params[:username])
+user = User.find_by(username: params[:username])
 
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
