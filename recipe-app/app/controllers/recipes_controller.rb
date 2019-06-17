@@ -11,9 +11,13 @@ class RecipesController < ApplicationController
   end
   
   post "/recipes" do
-    if params[:name].empty || params[:ingredients].empty
-      @recipe=Recipe.create(name: params[:name], ingredients: params[:ingredients], cook_time: params[:cooke_time])
-    redirect "/recipes/"
+    user=current_user 
+    if params[:name].empty || params[:ingredients].empty || params[:cook_time].empty 
+      redirect to "recipes/new"
+    end 
+      @recipe=Recipe.create(:name => params[:name], :ingredients =>  params[:ingredients], :cook_time =>  params[:cooke_time], :user_id => user.id )
+    
+    redirect "/recipes"
   end 
 
   get "/recipes/new" do
@@ -39,6 +43,7 @@ class RecipesController < ApplicationController
      end 
      @recipe = Recipe.find(params[:id])
        if current_user.id != @recipe.user_id
+         redirect "/recipes"
        end
 
     erb :"/recipes/edit"
@@ -46,19 +51,27 @@ class RecipesController < ApplicationController
 
   # PATCH: /recipes/5
   patch "/recipes/:id" do
+     if params[:name].empty || params[:ingredients].empty || params[:cook_time].empty 
+      redirect "recipes/#{params[:id]}/edit" 
+    end 
     @recipe=Recipe.find(params[:id])
     @recipe.name=params[:name]
     @recipe.ingredients=params[:ingredients]
     @recipe.cook_time=params[:cook_time]
     @recipe.save 
-    redirect "/recipes/:id"
+    redirect "/recipes/#{@recipe.id}"
   end
 
  
   delete "/recipes/:id/delete" do
-    @recipe=Recipe.find_by_id(params)
+    if is_logged_in 
+    @recipe=Recipe.find(params[:id])
+  
+  if current_user == @recipe.user_id 
     @recipe.delete 
-    
+  end 
     redirect "/recipes"
+  else 
+    redirect "/login"
   end
 end
