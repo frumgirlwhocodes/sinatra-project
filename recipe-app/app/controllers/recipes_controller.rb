@@ -37,11 +37,19 @@ class RecipesController < ApplicationController
 
   # PATCH: /recipes/5
   patch "/recipes/:id" do
+    @recipe=Recipe.find(params[:id])
+    @recipe.name=params[:name]
+    @recipe.ingredients=params[:ingredients]
+    @recipe.cook_time=params[:cook_time]
+    @recipe.save 
     redirect "/recipes/:id"
   end
 
-  # DELETE: /recipes/5/delete
+ 
   delete "/recipes/:id/delete" do
+    @recipe=Recipe.find_by_id(params)
+    @recipe.delete 
+    
     redirect "/recipes"
   end
 end
