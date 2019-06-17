@@ -9,31 +9,30 @@ class RecipesController < ApplicationController
     else redirect to '/login'
     end
   end
+  
+  post "/recipes" do
+      @recipe=Recipe.create(name: params[:name], ingredients: params[:ingredients], cook_time[:cooke_time])
+    redirect "/recipes/"
+  end 
 
 
   # GET: /recipes/new
   get "/recipes/new" do
     if is_logged_in
-    erb  :"/recipes/new.html"
+    erb  :"/recipes/new"
   else 
     redirect "/login"
     end 
-  
-  end
-post "/recipes" do
-      @recipe=Recipe.create(params)
-    redirect "/recipes/"
   end
 
- 
   # GET: /recipes/5
   get "/recipes/:id" do
-    erb :"/recipes/show.html"
+    erb :"/recipes/show"
   end
 
   # GET: /recipes/5/edit
   get "/recipes/:id/edit" do
-    erb :"/recipes/edit.html"
+    erb :"/recipes/edit"
   end
 
   # PATCH: /recipes/5
