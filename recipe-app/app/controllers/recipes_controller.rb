@@ -15,8 +15,6 @@ class RecipesController < ApplicationController
     redirect "/recipes/"
   end 
 
-
-  # GET: /recipes/new
   get "/recipes/new" do
     if is_logged_in
     erb  :"/recipes/new"
@@ -25,8 +23,9 @@ class RecipesController < ApplicationController
     end 
   end
 
-  # GET: /recipes/5
+
   get "/recipes/:id" do
+    @recipe=Recipe.find(params[:id])
     erb :"/recipes/show"
   end
 
