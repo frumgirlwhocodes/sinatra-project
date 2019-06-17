@@ -11,6 +11,7 @@ class RecipesController < ApplicationController
   end
   
   post "/recipes" do
+    if params[:name].empty || params[:ingredients].empty
       @recipe=Recipe.create(name: params[:name], ingredients: params[:ingredients], cook_time: params[:cooke_time])
     redirect "/recipes/"
   end 
@@ -25,12 +26,20 @@ class RecipesController < ApplicationController
 
 
   get "/recipes/:id" do
+      if !is_logged_in?
+      redirect to '/login'
+    end
     @recipe=Recipe.find(params[:id])
     erb :"/recipes/show"
   end
 
   get "/recipes/:id/edit" do
+     if !is_logged_in?
+       redirect to '/login'
+     end 
      @recipe = Recipe.find(params[:id])
+       if current_user.id != @recipe.user_id
+       end
 
     erb :"/recipes/edit"
   end
