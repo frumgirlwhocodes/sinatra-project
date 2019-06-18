@@ -3,13 +3,13 @@ class UsersController < ApplicationController
 
   get '/signup' do
     if !is_logged_in?  
-      erb :'/users/create_user'
+      erb :'/users/sign_up'
     else
     redirect to '/recipes'
     end
   end
   post '/signup' do
-		if params[:username].empty? || params[:email].empty? || params[:password].empty?
+		if params[:username].empty? || params[:email].empty? || params[:password_digest].empty?
 			redirect '/signup'
 		else
 		  user=User.create(params)
@@ -34,7 +34,7 @@ user = User.find_by(username: params[:username])
       session[:user_id] = user.id
       redirect to '/recipes'
     else
-      erb :failure
+      erb :"/users/failure"
     end
   end
   
