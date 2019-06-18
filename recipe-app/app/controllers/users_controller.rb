@@ -51,7 +51,7 @@ user = User.find_by(username: params[:username])
     slug = params[:slug]
     @user = User.find_by_slug(slug)
   @recipes= @user.recipes
-    erb :"/users/show.html"
+    erb :"/users/show"
   end
   
   end
