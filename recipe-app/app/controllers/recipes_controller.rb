@@ -34,10 +34,10 @@ end
 
   get "/recipes/:id" do
       if !is_logged_in?
-      redirect to '/login'
+      redirect  '/login'
     end
-    
-    @recipe=Recipe.find(params[:id])
+    binding.pry 
+    @recipe=Recipe.find_by_id(params[:id])
     erb :"/recipes/show"
   end
 

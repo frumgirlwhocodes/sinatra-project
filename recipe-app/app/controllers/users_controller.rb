@@ -50,7 +50,7 @@ user = User.find_by(username: params[:username])
   get '/users/:slug' do
     slug = params[:slug]
     @user = User.find_by_slug(slug)
-    if current_user.id=@user.id 
+    if current_user == @user
   @recipes= @user.recipes
     erb :"/users/show"
   else 
