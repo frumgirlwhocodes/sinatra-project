@@ -1,12 +1,13 @@
 class RecipesController < ApplicationController
 
-  # GET: /recipes
+
   get "/recipes" do
     if is_logged_in?
       @recipes = Recipe.all
       @user= current_user
       erb :"/recipes/recipes"
-    else redirect to '/login'
+    else 
+      redirect '/login'
     end
   end
   
@@ -16,8 +17,8 @@ class RecipesController < ApplicationController
        redirect to "recipes/new"
      else 
       recipe=Recipe.create(params)
-      #(:name => params[:name], :ingredients =>  params[:ingredients], :cook_time =>  params[:cooke_time], :user_id => user.id )
-     current_user.recipes << recipe
+     recipe.user == current_user
+     recipe.save
     redirect "/recipes/#{recipe.id}"
 end 
   end 
