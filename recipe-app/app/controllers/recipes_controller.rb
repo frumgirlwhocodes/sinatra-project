@@ -75,3 +75,4 @@ class RecipesController < ApplicationController
     redirect "/login"
   end
 end
+end 
