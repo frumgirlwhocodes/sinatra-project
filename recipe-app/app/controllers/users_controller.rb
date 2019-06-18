@@ -22,7 +22,7 @@ class UsersController < ApplicationController
    get '/login' do
     if is_logged_in?  
       redirect to '/recipes'
-    end
+    else 
 
     erb :"/users/login"
   end
