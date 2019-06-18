@@ -33,13 +33,14 @@ end
 
 
   get "/recipes/:id" do
-      if !is_logged_in?
-      redirect  '/login'
+     if is_logged_in?
+      @recipe = Recipe.find_by_id(params[:id])
+      erb :'/recipes/show'
+    else 
+      redirect '/login'
     end
-  
-    @recipe=Recipe.find_by_id(params[:id])
-    erb :"/recipes/show"
   end
+      
 
   get "/recipes/:id/edit" do
      if !is_logged_in?
