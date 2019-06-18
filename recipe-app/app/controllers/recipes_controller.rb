@@ -24,7 +24,7 @@ end
   end 
 
   get "/recipes/new" do
-    if is_logged_in
+    if is_logged_in?
     erb  :"/recipes/new"
   else 
     redirect "/login"
@@ -36,6 +36,7 @@ end
       if !is_logged_in?
       redirect to '/login'
     end
+    
     @recipe=Recipe.find(params[:id])
     erb :"/recipes/show"
   end
@@ -54,6 +55,7 @@ end
 
   # PATCH: /recipes/5
   patch "/recipes/:id" do
+    binding.pry 
      if params[:name].empty? || params[:ingredients].empty? || params[:cook_time].empty?
       redirect "recipes/#{params[:id]}/edit" 
     end 
@@ -67,10 +69,10 @@ end
 
  
   delete "/recipes/:id/delete" do
-    if is_logged_in 
+    if is_logged_in?
     @recipe=Recipe.find(params[:id])
   
-  if @recipe && current_user == @recipe.user_id 
+  if @recipe && current_user == @recipe.user
     @recipe.delete 
   end 
     redirect "/recipes"
