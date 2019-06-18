@@ -11,13 +11,15 @@ class RecipesController < ApplicationController
   end
   
   post "/recipes" do
-    user=current_user 
-    if params[:name].empty || params[:ingredients].empty || params[:cook_time].empty 
-      redirect to "recipes/new"
-    end 
-      @recipe=Recipe.create(:name => params[:name], :ingredients =>  params[:ingredients], :cook_time =>  params[:cooke_time], :user_id => user.id )
     
-    redirect "/recipes"
+    if params[:name].empty? || params[:ingredients].empty? || params[:cook_time].empty? 
+       redirect to "recipes/new"
+     else 
+      recipe=Recipe.create(params)
+      #(:name => params[:name], :ingredients =>  params[:ingredients], :cook_time =>  params[:cooke_time], :user_id => user.id )
+     current_user.recipes << recipe
+    redirect "/recipes/#{recipe.id}"
+end 
   end 
 
   get "/recipes/new" do
