@@ -53,7 +53,7 @@ end
 
   # PATCH: /recipes/5
   patch "/recipes/:id" do
-     if params[:name].empty || params[:ingredients].empty || params[:cook_time].empty 
+     if params[:name].empty? || params[:ingredients].empty? || params[:cook_time].empty?
       redirect "recipes/#{params[:id]}/edit" 
     end 
     @recipe=Recipe.find(params[:id])

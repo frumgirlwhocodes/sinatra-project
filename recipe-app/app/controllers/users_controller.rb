@@ -9,10 +9,10 @@ class UsersController < ApplicationController
     end
   end
   post '/signup' do
-		if params[:username].empty? || params[:email].empty? || params[:password_digest].empty?
+		if params[:username].empty? || params[:email].empty? || params[:password].empty?
 			redirect '/signup'
 		else
-		  user=User.create(params)
+		  user=User.create(username: params[:username], email: params[:emial], password: params[:password])
 		  session[:id]=user.id 
 		  redirect "/recipes"
 		end 
