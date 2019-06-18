@@ -5,14 +5,16 @@ class UsersController < ApplicationController
     if !is_logged_in?  
       erb :'/users/sign_up'
     else
-    redirect to '/recipes'
+    redirect  '/recipes'
     end
   end
+  
   post '/signup' do
-		  if params[:username] == "" || params[:email] == "" || params[:password] == ""
+		  if params[:user][:username] == "" || params[:user][:email] == "" || params[:user][:password] == ""
 			redirect '/signup'
 		else
-		user = User.create(params)
+		  
+		user = User.create(params[:user])
       session[:user_id] = user.id
 		  redirect "/recipes"
 		end 
@@ -21,11 +23,12 @@ class UsersController < ApplicationController
   
    get '/login' do
     if is_logged_in?  
-      redirect to '/recipes'
+      redirect  '/recipes'
     else 
 
     erb :"/users/login"
   end
+end 
   
   post '/login' do 
 user = User.find_by(username: params[:username])
@@ -43,9 +46,6 @@ user = User.find_by(username: params[:username])
     redirect "login"
     
   end 
-
-
-
 
   get '/users/:slug' do
     slug = params[:slug]
@@ -65,7 +65,7 @@ delete '/users/:slug/delete' do
 
 end
   
-  end
+  
 
  
 

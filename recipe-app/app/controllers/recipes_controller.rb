@@ -69,7 +69,7 @@ end
     if is_logged_in 
     @recipe=Recipe.find(params[:id])
   
-  if current_user == @recipe.user_id 
+  if @recipe && current_user == @recipe.user_id 
     @recipe.delete 
   end 
     redirect "/recipes"
