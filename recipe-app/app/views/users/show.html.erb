@@ -2,3 +2,9 @@
 <p> <% @recipes.each do |recipe| %> 
 <h3> <%= recipe.name %>,   <%= recipe.ingredients %>, <%= recipe.cook_time %> </h3> 
 <% end %> </p> 
+
+<h3> To Create a New Recipe</h3>
+<a href="/recipes/new">Create a new recipe</a><br>
+
+<h3> To Log out </h3>
+<a href="/logout">Log Out</a>

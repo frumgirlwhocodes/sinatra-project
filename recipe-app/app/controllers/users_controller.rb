@@ -50,9 +50,20 @@ user = User.find_by(username: params[:username])
   get '/users/:slug' do
     slug = params[:slug]
     @user = User.find_by_slug(slug)
+    if current_user.id=@user.id 
   @recipes= @user.recipes
     erb :"/users/show"
+  else 
+    redirect "/login"
   end
+end 
+delete '/users/:slug/delete' do
+    @user = User.find_by_slug(params[:slug])
+    @user.destroy
+    redirect "/"
+ end
+
+end
   
   end
 
