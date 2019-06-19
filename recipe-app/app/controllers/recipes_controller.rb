@@ -11,6 +11,7 @@ get "/recipes/new" do
     if is_logged_in?
       @recipes = Recipe.all
       @user= current_user
+      binding.pry
       erb :"/recipes/recipes"
     else 
       redirect '/login'
@@ -79,7 +80,7 @@ end
   delete "/recipes/:id/delete" do
     if is_logged_in?
     @recipe=Recipe.find(params[:id])
-  
+ 
   if @recipe && current_user == @recipe.user
     @recipe.delete 
   end 
