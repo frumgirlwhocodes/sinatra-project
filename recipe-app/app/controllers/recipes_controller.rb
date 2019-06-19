@@ -7,6 +7,27 @@ get "/recipes/new" do
     redirect "/login"
     end 
   end
+  get "/recipes" do
+    if is_logged_in?
+      @recipes = Recipe.all
+      @user= current_user
+      erb :"/recipes/recipes"
+    else 
+      redirect '/login'
+    end
+  end
+  
+ get "/recipes" do
+    if is_logged_in?
+      @recipes = Recipe.all
+      @user= current_user
+      erb :"/recipes/recipes"
+    else 
+      redirect '/login'
+    end
+  end
+  
+ 
  
    post "/recipes" do
     
@@ -20,22 +41,15 @@ get "/recipes/new" do
 end 
   end 
 
-  get "/recipes" do
-    if is_logged_in?
-      @recipes = Recipe.all
-      @user= current_user
-      erb :"/recipes/recipes"
-    else 
-      redirect '/login'
-    end
-  end
+
   
- 
+
 
   get "/recipes/:id" do
    if !is_logged_in? 
      redirect to '/login'
     else 
+      binding.pry
       @recipe = Recipe.find(params[:id])
       erb :'/recipes/show'
   end 
