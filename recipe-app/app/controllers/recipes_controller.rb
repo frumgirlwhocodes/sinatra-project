@@ -33,38 +33,37 @@ end
 
 
   get "/recipes/:id" do
-     if is_logged_in?
-      @recipe = Recipe.find_by_id(params[:id])
+   redirect '/login' if !is_logged_in? 
+       
+      @recipe = Recipe.find_by(id: params[:id])
+      if session[:user_id] == current_user.id
       erb :'/recipes/show'
-    else 
-      redirect '/login'
-    end
+  else
+    redirect "/recipes"
   end
+end
       
 
   get "/recipes/:id/edit" do
-     if !is_logged_in?
-       redirect to '/login'
-     end 
-     @recipe = Recipe.find(params[:id])
-       if current_user.id != @recipe.user_id
-         redirect "/recipes"
-       end
+   redirect to '/login'   if !is_logged_in?
+     
+     @recipe = Recipe.find_by_id( params[:id])
 
     erb :"/recipes/edit"
   end
 
-  # PATCH: /recipes/5
+
   patch "/recipes/:id" do
-    binding.pry 
+    
      if params[:name].empty? || params[:ingredients].empty? || params[:cook_time].empty?
       redirect "recipes/#{params[:id]}/edit" 
     end 
-    @recipe=Recipe.find(params[:id])
+      @recipe=Recipe.find(params[:id])
     @recipe.name=params[:name]
     @recipe.ingredients=params[:ingredients]
     @recipe.cook_time=params[:cook_time]
     @recipe.save 
+
     redirect "/recipes/#{@recipe.id}"
   end
 
