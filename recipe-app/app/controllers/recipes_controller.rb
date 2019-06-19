@@ -1,17 +1,14 @@
 class RecipesController < ApplicationController
 
-
-  get "/recipes" do
+get "/recipes/new" do
     if is_logged_in?
-      @recipes = Recipe.all
-      @user= current_user
-      erb :"/recipes/recipes"
-    else 
-      redirect '/login'
-    end
+    erb  :"/recipes/new"
+  else 
+    redirect "/login"
+    end 
   end
-  
-  post "/recipes" do
+ 
+   post "/recipes" do
     
     if params[:name].empty? || params[:ingredients].empty? || params[:cook_time].empty? 
        redirect to "recipes/new"
@@ -23,14 +20,17 @@ class RecipesController < ApplicationController
 end 
   end 
 
-  get "/recipes/new" do
+  get "/recipes" do
     if is_logged_in?
-    erb  :"/recipes/new"
-  else 
-    redirect "/login"
-    end 
+      @recipes = Recipe.all
+      @user= current_user
+      erb :"/recipes/recipes"
+    else 
+      redirect '/login'
+    end
   end
-
+  
+ 
 
   get "/recipes/:id" do
    redirect '/login' if !is_logged_in? 

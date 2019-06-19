@@ -1,7 +1,7 @@
 <h1>Welcome, <%= @user.username %></h1> 
 <h3> All your recipes displayed</h3>
 <% @recipes.each do |recipe| %> 
-<p> Recipe Name: <%=recipe.name%> </p>
+<h3><p> Recipe Name: <%=recipe.name%> </p></h3>
 <p> Recipe ingredients: <%=recipe.ingredients%> </p>
 <p> Recipe Cook Time:  <%=recipe.cook_time%> </p>
 <p> <% recipe_link = "/recipes/#{recipe.id}" %>
@@ -11,8 +11,7 @@
 <h4> To Create a New Recipe</h4>
 <a href="/recipes/new">Create a new recipe</a><br>
 
-<h4> To edit your recipe click below</h4>
-<a href="/recipes/:id/edit"> Edit recipe</a><br>
+
 
 <h4> To log out </h4>
 <a href= "/recipes/edit">Log Out</a>
