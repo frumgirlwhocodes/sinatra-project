@@ -17,15 +17,7 @@ get "/recipes/new" do
     end
   end
   
- get "/recipes" do
-    if is_logged_in?
-      @recipes = Recipe.all
-      @user= current_user
-      erb :"/recipes/recipes"
-    else 
-      redirect '/login'
-    end
-  end
+ 
   
  
  
@@ -35,7 +27,7 @@ get "/recipes/new" do
        redirect to "recipes/new"
      else 
       recipe=Recipe.create(params)
-     recipe.user == current_user
+     recipe.user = current_user
      recipe.save
     redirect "/recipes/#{recipe.id}"
 end 
