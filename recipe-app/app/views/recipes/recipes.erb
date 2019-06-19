@@ -4,8 +4,7 @@
 <h3><p> Recipe Name: <%=recipe.name%> </p></h3>
 <p> Recipe ingredients: <%=recipe.ingredients%> </p>
 <p> Recipe Cook Time:  <%=recipe.cook_time%> </p>
-<p> <% recipe_link = "/recipes/#{recipe.id}" %>
-    <p><a href="<%= recipe_link %>"></a></p>
+    <p><a href="<%= "/recipes/#{recipe.id}" %>"> Click to view and edit this recipe </a></p>
 <% end%> 
 
 <h4> To Create a New Recipe</h4>
