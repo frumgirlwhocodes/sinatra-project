@@ -2,7 +2,7 @@
 <h1>  Edit your recipe</h1>
 
 
-<form method="POST" action="/recipes/<%=@recipe.user_id%>">
+<form method="POST" action="/recipes/<%=@recipe.id%>">
   <input id="hidden" type="hidden" name="_method" value="patch" />
 
   <label for="name">Name</label>
@@ -12,7 +12,7 @@
   <input type="text" id="ingredients" name="ingredients" value="<%=@recipe.ingredients%>" />
   <br>
   <label for="cook_time">Cook Time</label>
-  <input type="text" id="cook_time" name="cook_time" value="<%=@recipe.cook_time%>" />
+  <input type="text" id="cook_time" name="cook_time" value="<%=@recipe.cook_time %>" />
   <br>
   <input type="submit" value="Edit" />
 </form
