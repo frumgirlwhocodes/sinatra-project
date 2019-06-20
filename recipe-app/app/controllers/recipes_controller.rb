@@ -7,6 +7,7 @@ get "/recipes/new" do
     redirect "/login"
     end 
   end
+  
   get "/recipes" do
     if is_logged_in?
       @recipes = Recipe.all
@@ -42,7 +43,7 @@ end
    if !is_logged_in? 
      redirect to '/login'
     else 
-  binding.pry 
+  
       @recipe = Recipe.find(params[:id])
       erb :'/recipes/show'
   end 
@@ -50,16 +51,22 @@ end
       
 
   get "/recipes/:id/edit" do
-      if !is_logged_in?
+      if is_logged_in?
+          @recipe = Recipe.find_by(id: params[:id])
+          if @recipe && @recipe.user == current_user
+             erb :"/recipes/edit"
+           else redirect "recipes"
+           end 
+         else 
         redirect "/login"
       end 
+    end 
+      
 
      @recipe = Recipe.find(params[:id])
-if current_user.id != @recipe.user_id 
+
   redirect "recipes"
-end 
-    erb :"/recipes/edit"
-  end
+
 
 
   patch "/recipes/:id" do

@@ -15,6 +15,7 @@ class UsersController < ApplicationController
 		else
 		  
 		user = User.create(params[:user])
+		binding.pry 
       session[:user_id] = user.id
 		  redirect "/recipes"
 		end 
@@ -31,11 +32,11 @@ class UsersController < ApplicationController
 end 
   
   post '/login' do 
-user = User.find_by(username: params[:username])
+@user = User.find_by(username: params[:username]) 
 
-    if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
-      redirect to '/recipes'
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
+      redirect '/recipes'
     else
       erb :"/users/failure"
     end
