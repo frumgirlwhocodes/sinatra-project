@@ -15,7 +15,6 @@ class UsersController < ApplicationController
 		else
 		  
 		user = User.create(params[:user])
-		binding.pry 
       session[:user_id] = user.id
 		  redirect "/recipes"
 		end 

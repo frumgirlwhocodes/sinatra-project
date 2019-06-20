@@ -63,9 +63,7 @@ end
     end 
       
 
-     @recipe = Recipe.find(params[:id])
-
-  redirect "recipes"
+    
 
 
 
